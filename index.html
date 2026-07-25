@@ -2,21 +2,18 @@
 <html lang="en" class="dark scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zebeez Sentinel & AI — Official Documentation</title>
-<!-- Discord & Open Graph Embed Tags -->
-<meta property="og:title" content="Zebeez Sentinel & AI — Official Docs" />
-<meta property="og:description" content="Next-Gen Discord Security & Utility Suite featuring Visual Verification, Anti-Raid Shielding, Anti-Invite Obfuscation Scanning, and Persona Locks." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://kaiso-666.github.io/Zebeez-AI" />
-<meta property="og:image" content="https://raw.githubusercontent.com/Kaiso-666/Zebeez-AI/refs/heads/main/idk_20260725112817.png" />
-<meta property="og:site_name" content="Zebeez Docs" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Zebeez Sentinel & AI Engine — Developer Documentation</title>
 
-<!-- Discord Embed Left Border Accent Color (Hex format) -->
-<meta name="theme-color" content="#6366f1" />
+    <!-- Meta / Open Graph -->
+    <meta property="og:title" content="Zebeez Sentinel & AI — Documentation" />
+    <meta property="og:description" content="High-performance Discord security framework, obfuscation invite scanner, visual verification engine, and custom chat transformers." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://kaiso-666.github.io/Zebeez-AI" />
+    <meta property="og:image" content="https://raw.githubusercontent.com/Kaiso-666/Zebeez-AI/refs/heads/main/idk_20260725112817.png" />
+    <meta name="theme-color" content="#4f46e5" />
+    <meta name="twitter:card" content="summary_large_image" />
 
-<!-- Twitter/Discord Large Image Card Format -->
-<meta name="twitter:card" content="summary_large_image" />
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -24,7 +21,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
@@ -33,26 +30,23 @@
                 extend: {
                     fontFamily: {
                         sans: ['Plus Jakarta Sans', 'sans-serif'],
-                        mono: ['Fira Code', 'monospace'],
+                        mono: ['JetBrains Mono', 'monospace'],
                     },
                     colors: {
                         brand: {
-                            50: '#f0f3ff',
-                            100: '#e1e7ff',
-                            400: '#818cf8',
                             500: '#6366f1',
                             600: '#4f46e5',
-                            900: '#1e1b4b',
+                            700: '#4338ca',
                             accent: '#a855f7',
                             cyan: '#06b6d4',
                             emerald: '#10b981'
                         },
-                        dark: {
-                            bg: '#090d16',
-                            card: '#111827',
-                            surface: '#1e293b',
-                            border: '#1f293d',
-                            hover: '#334155'
+                        obsidian: {
+                            900: '#06080d',
+                            800: '#0b0f19',
+                            700: '#121826',
+                            border: 'rgba(255,255,255,0.08)',
+                            hover: 'rgba(255,255,255,0.12)'
                         }
                     }
                 }
@@ -61,510 +55,455 @@
     </script>
 
     <style>
-        /* Custom Glassmorphism & Aesthetics */
+        /* Mobile Performance & CSS Hardware Acceleration */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
         body {
-            background-color: #080c14;
-            color: #f3f4f6;
+            background-color: #06080d;
+            color: #e2e8f0;
             background-image: 
-                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.12) 0px, transparent 50%),
-                radial-gradient(at 100% 0%, rgba(168, 85, 247, 0.12) 0px, transparent 50%),
-                radial-gradient(at 50% 100%, rgba(6, 182, 212, 0.08) 0px, transparent 50%);
+                radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.15), transparent 45%),
+                linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 100% 100%, 32px 32px, 32px 32px;
             background-attachment: fixed;
         }
 
-        .glass-card {
-            background: rgba(17, 24, 39, 0.75);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+        /* Performance optimized cards for mobile rendering */
+        .tech-card {
+            background: rgba(11, 15, 25, 0.9);
             border: 1px solid rgba(255, 255, 255, 0.08);
+            transform: translateZ(0);
         }
 
-        .glass-card-hover {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        /* High desktop aesthetic blur, fall back on mobile for 60fps scrolling */
+        @media (min-width: 768px) {
+            .glass-header {
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                background: rgba(6, 8, 13, 0.85);
+            }
+        }
+        @media (max-width: 767px) {
+            .glass-header {
+                background: #06080d;
+            }
         }
 
-        .glass-card-hover:hover {
-            transform: translateY(-3px);
-            border-color: rgba(129, 140, 248, 0.3);
-            box-shadow: 0 10px 30px -10px rgba(99, 102, 241, 0.25);
+        .glow-btn {
+            position: relative;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glow-btn:hover {
+            box-shadow: 0 0 25px rgba(99, 102, 241, 0.45);
+            transform: translateY(-1px);
         }
 
-        .glow-text {
-            text-shadow: 0 0 20px rgba(129, 140, 248, 0.5);
+        /* Tech Scanline Effect on Hero */
+        .scanline-bg {
+            background: linear-gradient(180deg, rgba(255,255,255,0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 4px;
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #080c14;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #1e293b;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #475569;
-        }
+        /* Custom Modern Scrollbars */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #06080d; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #334155; }
     </style>
 </head>
-<body class="font-sans antialiased min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
+<body class="font-sans antialiased min-h-screen flex flex-col selection:bg-brand-600 selection:text-white">
 
     <!-- Toast Notification -->
-    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 flex items-center gap-3 bg-brand-600 text-white px-5 py-3 rounded-xl shadow-2xl border border-brand-400/30">
-        <i class="fa-solid fa-circle-check text-lg"></i>
-        <span id="toast-msg" class="font-medium">Copied to clipboard!</span>
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 flex items-center gap-3 bg-obsidian-700 text-white px-4 py-3 rounded-xl border border-brand-500/40 shadow-2xl">
+        <i class="fa-solid fa-circle-check text-brand-emerald"></i>
+        <span id="toast-msg" class="text-sm font-medium">Copied to clipboard</span>
     </div>
 
-    <!-- Navigation Header -->
-    <header class="sticky top-0 z-40 w-full glass-card border-b border-white/5 bg-dark-bg/80">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <!-- Logo -->
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 via-brand-accent to-brand-cyan flex items-center justify-center shadow-lg shadow-brand-500/20">
-                    <i class="fa-solid fa-shield-halved text-white text-lg"></i>
+    <!-- EXTREME TOP HERO / BOT INVITE BANNER -->
+    <section class="w-full border-b border-obsidian-border bg-gradient-to-b from-brand-900/30 via-obsidian-800 to-obsidian-900 relative overflow-hidden pt-6 pb-8 px-4 sm:px-6 lg:px-8">
+        <!-- Ambient Glow Backdrops -->
+        <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-brand-500/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -top-24 right-10 w-72 h-72 bg-brand-accent/15 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
+            <!-- Left Info Banner -->
+            <div class="space-y-4 text-center lg:text-left max-w-2xl">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-400 text-xs font-semibold tracking-wide">
+                    <span class="w-2 h-2 rounded-full bg-brand-emerald animate-pulse"></span>
+                    Zebeez v4.2 Deployment Ready
                 </div>
-                <div>
-                    <span class="font-bold text-lg tracking-wide bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">Zebeez Docs</span>
-                    <span class="text-xs text-brand-400 font-mono block -mt-1">v4.2.0 • Security & AI</span>
+
+                <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-none">
+                    Armor Your Discord Guild with <span class="bg-gradient-to-r from-brand-400 via-brand-accent to-brand-cyan bg-clip-text text-transparent">Zebeez Sentinel</span>
+                </h1>
+
+                <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
+                    Visual verification captchas, real-time homoglyph invite scanners, and continuous persona locks—engineered for maximum security and minimal latency.
+                </p>
+
+                <!-- Status Badges -->
+                <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-1 text-xs text-gray-400 font-mono">
+                    <span class="flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-brand-emerald"></i> Anti-Raid Active</span>
+                    <span class="flex items-center gap-1.5"><i class="fa-solid fa-bolt text-amber-400"></i> &lt; 20ms Latency</span>
+                    <span class="flex items-center gap-1.5"><i class="fa-solid fa-server text-brand-cyan"></i> 99.9% Uptime</span>
                 </div>
             </div>
 
-            <!-- Header Quick Links -->
-            <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-gray-300">
+            <!-- Right Invite Action Box -->
+            <div class="w-full sm:w-auto flex-shrink-0">
+                <div class="tech-card p-6 rounded-2xl border border-brand-500/30 shadow-2xl space-y-4 max-w-md mx-auto relative overflow-hidden">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-500 via-brand-600 to-brand-accent flex items-center justify-center text-white text-2xl shadow-lg shadow-brand-500/30 flex-shrink-0">
+                            <i class="fa-solid fa-robot"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-lg font-bold text-white">Add Zebeez to Server</h2>
+                            <p class="text-xs text-gray-400">Instant OAuth2 Setup • Slash Commands</p>
+                        </div>
+                    </div>
+
+                    <!-- Invite Action Buttons -->
+                    <div class="space-y-2">
+                        <a href="https://discord.com/oauth2/authorize" target="_blank" rel="noopener" class="glow-btn w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-brand-600 via-brand-500 to-brand-accent text-white font-bold text-sm flex items-center justify-center gap-3 shadow-lg shadow-brand-500/25 border border-white/20">
+                            <i class="fa-brands fa-discord text-lg"></i>
+                            <span>Authorize & Invite Bot</span>
+                            <i class="fa-solid fa-arrow-right text-xs opacity-70"></i>
+                        </a>
+                        <a href="#setup" class="w-full py-2.5 px-4 rounded-xl bg-obsidian-700 hover:bg-obsidian-hover border border-obsidian-border text-gray-300 text-xs font-semibold flex items-center justify-center gap-2 transition-colors">
+                            <i class="fa-solid fa-book text-brand-cyan"></i>
+                            <span>Read Administrator Guide</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 w-full glass-header border-b border-obsidian-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center text-white text-sm font-bold shadow-md shadow-brand-500/20">
+                    <i class="fa-solid fa-shield-cat"></i>
+                </div>
+                <span class="font-bold text-base tracking-tight text-white">Zebeez <span class="text-brand-400 font-mono text-xs">Docs</span></span>
+            </a>
+
+            <!-- Quick Navigation -->
+            <nav class="hidden md:flex items-center gap-6 text-xs font-semibold text-gray-300">
                 <a href="#overview" class="hover:text-brand-400 transition-colors">Overview</a>
-                <a href="#modules" class="hover:text-brand-400 transition-colors">Modules</a>
-                <a href="#commands" class="hover:text-brand-400 transition-colors">Commands</a>
-                <a href="#playground" class="hover:text-brand-400 transition-colors flex items-center gap-1.5 text-brand-accent"><i class="fa-solid fa-wand-magic-sparkles"></i> Lock Demo</a>
-                <a href="#setup" class="hover:text-brand-400 transition-colors">Setup Guide</a>
+                <a href="#modules" class="hover:text-brand-400 transition-colors">Capabilities</a>
+                <a href="#commands" class="hover:text-brand-400 transition-colors">Command Manual</a>
+                <a href="#playground" class="hover:text-brand-400 transition-colors text-brand-accent">Lock Demo</a>
+                <a href="#setup" class="hover:text-brand-400 transition-colors">Setup</a>
             </nav>
 
-            <!-- Action Button -->
+            <!-- Quick Actions -->
             <div class="flex items-center gap-3">
-                <a href="#commands" class="px-4 py-2 rounded-xl bg-gradient-to-r from-brand-600 to-brand-accent text-white text-sm font-semibold shadow-lg shadow-brand-500/20 hover:opacity-90 transition-all flex items-center gap-2">
-                    <i class="fa-solid fa-terminal text-xs"></i>
-                    <span>Explore Docs</span>
+                <a href="https://discord.com/oauth2/authorize" target="_blank" class="px-3 py-1.5 rounded-lg bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold transition-all flex items-center gap-1.5">
+                    <i class="fa-brands fa-discord"></i>
+                    <span>Invite</span>
                 </a>
             </div>
         </div>
     </header>
 
-    <!-- Main Container -->
+    <!-- Main Workspace Container -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full flex flex-col md:flex-row gap-8">
 
         <!-- Sidebar Navigation -->
-        <aside class="w-full md:w-64 flex-shrink-0">
-            <div class="sticky top-24 space-y-6">
+        <aside class="w-full md:w-60 flex-shrink-0">
+            <div class="sticky top-20 space-y-4">
                 <!-- Navigation Group -->
-                <div class="glass-card p-4 rounded-2xl space-y-2">
-                    <div class="text-xs font-bold text-gray-400 uppercase tracking-wider px-3 mb-2">Documentation</div>
-                    <a href="#overview" class="flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all">
-                        <i class="fa-solid fa-house text-brand-400 w-5"></i> System Overview
+                <div class="tech-card p-3 rounded-xl space-y-1">
+                    <div class="text-[10px] font-bold text-gray-400 uppercase tracking-wider px-3 py-1 font-mono">Documentation</div>
+                    <a href="#overview" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium text-gray-300 hover:bg-obsidian-hover hover:text-white transition-all">
+                        <i class="fa-solid fa-server text-brand-500 w-4"></i> System Overview
                     </a>
-                    <a href="#modules" class="flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all">
-                        <i class="fa-solid fa-cubes text-brand-accent w-5"></i> Core Capabilities
+                    <a href="#modules" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium text-gray-300 hover:bg-obsidian-hover hover:text-white transition-all">
+                        <i class="fa-solid fa-layer-group text-brand-accent w-4"></i> Core Modules
                     </a>
-                    <a href="#commands" class="flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all">
-                        <i class="fa-solid fa-terminal text-brand-cyan w-5"></i> Command Manual
+                    <a href="#commands" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium text-gray-300 hover:bg-obsidian-hover hover:text-white transition-all">
+                        <i class="fa-solid fa-terminal text-brand-cyan w-4"></i> Command Manual
                     </a>
-                    <a href="#playground" class="flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all">
-                        <i class="fa-solid fa-icons text-pink-400 w-5"></i> Lock Playground
+                    <a href="#playground" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium text-gray-300 hover:bg-obsidian-hover hover:text-white transition-all">
+                        <i class="fa-solid fa-wand-magic-sparkles text-pink-400 w-4"></i> Lock Simulator
                     </a>
-                    <a href="#setup" class="flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all">
-                        <i class="fa-solid fa-sliders text-brand-emerald w-5"></i> Admin Setup Guide
+                    <a href="#setup" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium text-gray-300 hover:bg-obsidian-hover hover:text-white transition-all">
+                        <i class="fa-solid fa-sliders text-brand-emerald w-4"></i> Admin Setup Guide
                     </a>
                 </div>
 
-                <!-- Bot Status Card -->
-                <div class="glass-card p-4 rounded-2xl space-y-3 border border-brand-500/20">
+                <!-- Bot Status Widget -->
+                <div class="tech-card p-3.5 rounded-xl space-y-2 border border-brand-500/20">
                     <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">System Status</span>
-                        <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-emerald bg-brand-emerald/10 px-2 py-0.5 rounded-full border border-brand-emerald/20">
-                            <span class="w-2 h-2 rounded-full bg-brand-emerald animate-pulse"></span> Online
+                        <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wider font-mono">Core Engines</span>
+                        <span class="inline-flex items-center gap-1 text-[10px] font-bold text-brand-emerald bg-brand-emerald/10 px-2 py-0.5 rounded border border-brand-emerald/20">
+                            ONLINE
                         </span>
                     </div>
-                    <div class="text-xs text-gray-400 space-y-1 font-mono">
-                        <div class="flex justify-between"><span>Anti-Raid Guard:</span> <span class="text-gray-200">Active</span></div>
-                        <div class="flex justify-between"><span>Anti-Invite Engine:</span> <span class="text-gray-200">Active</span></div>
-                        <div class="flex justify-between"><span>Conversational AI:</span> <span class="text-gray-200">Ready</span></div>
+                    <div class="text-[11px] text-gray-400 space-y-1 font-mono">
+                        <div class="flex justify-between"><span>Captcha Gate:</span> <span class="text-gray-200">Active</span></div>
+                        <div class="flex justify-between"><span>Invite Shield:</span> <span class="text-gray-200">Active</span></div>
+                        <div class="flex justify-between"><span>Webhooks Engine:</span> <span class="text-gray-200">Active</span></div>
                     </div>
                 </div>
             </div>
         </aside>
 
-        <!-- Main Content Area -->
-        <main class="flex-1 space-y-12 min-w-0">
+        <!-- Main Content Panel -->
+        <main class="flex-1 space-y-10 min-w-0">
 
-            <!-- Hero / System Overview -->
-            <section id="overview" class="glass-card p-8 rounded-3xl relative overflow-hidden border border-brand-500/20">
-                <div class="absolute -right-16 -top-16 w-64 h-64 bg-brand-500/10 rounded-full blur-3xl pointer-events-none"></div>
-                
-                <div class="space-y-6 relative z-10">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs font-semibold uppercase tracking-wider">
-                        <i class="fa-solid fa-shield text-xs"></i> Next-Gen Discord Security & Utility Suite
-                    </div>
-                    
-                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
-                        Complete Control, <span class="bg-gradient-to-r from-brand-400 via-brand-accent to-brand-cyan bg-clip-text text-transparent glow-text">Zero Compromise</span>.
-                    </h1>
-
-                    <p class="text-gray-300 text-base leading-relaxed max-w-3xl">
-                        Welcome to the official manual for <strong>Zebeez Sentinel & AI Engine</strong>. Engineered to serve as an all-in-one server shield, intelligent assistant, media generator, and moderation power-tool. Built with state-of-the-art obfuscation scanning, visual verification gating, and seamless persona locks.
+            <!-- System Overview -->
+            <section id="overview" class="tech-card p-6 sm:p-8 rounded-2xl relative overflow-hidden">
+                <div class="space-y-4">
+                    <h2 class="text-xl sm:text-2xl font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-microchip text-brand-500"></i> Architecture & Overview
+                    </h2>
+                    <p class="text-gray-300 text-xs sm:text-sm leading-relaxed">
+                        Zebeez Sentinel & AI Engine provides production-grade security, automated chat transformation, image quote rendering, and conversational AI tools for Discord communities. Designed with low overhead and strict permission controls.
                     </p>
 
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-white/5">
-                        <div class="glass-card p-3 rounded-xl text-center">
-                            <div class="text-xl font-bold text-white font-mono">100%</div>
-                            <div class="text-xs text-gray-400">Raid Mitigation</div>
+                    <!-- Key Metrics Grid -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3">
+                        <div class="bg-obsidian-800 p-3 rounded-xl border border-obsidian-border text-center">
+                            <div class="text-lg font-bold text-white font-mono">100%</div>
+                            <div class="text-[11px] text-gray-400">Raid Mitigation</div>
                         </div>
-                        <div class="glass-card p-3 rounded-xl text-center">
-                            <div class="text-xl font-bold text-brand-accent font-mono">15+</div>
-                            <div class="text-xs text-gray-400">Persona Lock Modes</div>
+                        <div class="bg-obsidian-800 p-3 rounded-xl border border-obsidian-border text-center">
+                            <div class="text-lg font-bold text-brand-accent font-mono">15+</div>
+                            <div class="text-[11px] text-gray-400">Persona Modes</div>
                         </div>
-                        <div class="glass-card p-3 rounded-xl text-center">
-                            <div class="text-xl font-bold text-brand-cyan font-mono">Real-time</div>
-                            <div class="text-xs text-gray-400">Homoglyph Scan</div>
+                        <div class="bg-obsidian-800 p-3 rounded-xl border border-obsidian-border text-center">
+                            <div class="text-lg font-bold text-brand-cyan font-mono">Realtime</div>
+                            <div class="text-[11px] text-gray-400">Homoglyph Scan</div>
                         </div>
-                        <div class="glass-card p-3 rounded-xl text-center">
-                            <div class="text-xl font-bold text-brand-emerald font-mono">AI Vision</div>
-                            <div class="text-xs text-gray-400">Multimodal Context</div>
+                        <div class="bg-obsidian-800 p-3 rounded-xl border border-obsidian-border text-center">
+                            <div class="text-lg font-bold text-brand-emerald font-mono">Multimodal</div>
+                            <div class="text-[11px] text-gray-400">AI Context Engine</div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Feature Modules Highlight -->
-            <section id="modules" class="space-y-6">
+            <!-- Feature Modules -->
+            <section id="modules" class="space-y-4">
                 <div>
-                    <h2 class="text-2xl font-bold text-white flex items-center gap-3">
-                        <i class="fa-solid fa-cubes text-brand-accent"></i> Core Security & Capability Modules
+                    <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-layer-group text-brand-accent"></i> Core Capabilities
                     </h2>
-                    <p class="text-gray-400 text-sm">Deep dive into the underlying architecture protecting and empowering your guild.</p>
+                    <p class="text-xs text-gray-400">Integrated security and utility systems built into Zebeez.</p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <!-- Module 1 -->
-                    <div class="glass-card glass-card-hover p-6 rounded-2xl space-y-4">
-                        <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 text-xl">
-                            <i class="fa-solid fa-shield-cat"></i>
+                    <div class="tech-card p-5 rounded-xl space-y-2.5">
+                        <div class="w-10 h-10 rounded-lg bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 text-lg">
+                            <i class="fa-solid fa-shield-halved"></i>
                         </div>
-                        <h3 class="text-lg font-bold text-white">Visual Verification & Anti-Raid Shield</h3>
-                        <p class="text-gray-300 text-sm leading-relaxed">
-                            Defends against bot raids with persistent, interactive visual math captchas generated on the fly. Includes automatic join-spike detection, unauthorized bot-addition counter-action, and age restriction gates.
+                        <h3 class="text-sm font-bold text-white">Visual Verification & Captchas</h3>
+                        <p class="text-xs text-gray-300 leading-relaxed">
+                            Intercepts mass join-raids with dynamically generated visual math verification puzzles. Isolates unverified accounts automatically until passed.
                         </p>
-                        <div class="flex flex-wrap gap-2 pt-2">
-                            <span class="text-xs px-2.5 py-1 rounded-lg bg-dark-surface text-gray-300 font-mono">Interactive Captchas</span>
-                            <span class="text-xs px-2.5 py-1 rounded-lg bg-dark-surface text-gray-300 font-mono">Anti-Nuke Limiters</span>
-                        </div>
                     </div>
 
                     <!-- Module 2 -->
-                    <div class="glass-card glass-card-hover p-6 rounded-2xl space-y-4">
-                        <div class="w-12 h-12 rounded-xl bg-brand-accent/10 border border-brand-accent/20 flex items-center justify-center text-brand-accent text-xl">
+                    <div class="tech-card p-5 rounded-xl space-y-2.5">
+                        <div class="w-10 h-10 rounded-lg bg-brand-accent/10 border border-brand-accent/20 flex items-center justify-center text-brand-accent text-lg">
                             <i class="fa-solid fa-link-slash"></i>
                         </div>
-                        <h3 class="text-lg font-bold text-white">Anti-Invite Obfuscation Scanner</h3>
-                        <p class="text-gray-300 text-sm leading-relaxed">
-                            Scans messages, embeds, and attachments for unauthorized external Discord invites. Features advanced detection for Cyrillic/Greek homoglyphs, zero-width spaces, URL encoding, and obfuscated dots/slashes.
+                        <h3 class="text-sm font-bold text-white">Anti-Invite Obfuscation Scanner</h3>
+                        <p class="text-xs text-gray-300 leading-relaxed">
+                            Inspects message strings, embeds, and Cyrillic/Greek homoglyphs to catch zero-width spaces or obfuscated self-promotion links.
                         </p>
-                        <div class="flex flex-wrap gap-2 pt-2">
-                            <span class="text-xs px-2.5 py-1 rounded-lg bg-dark-surface text-gray-300 font-mono">Homoglyph Unpack</span>
-                            <span class="text-xs px-2.5 py-1 rounded-lg bg-dark-surface text-gray-300 font-mono">Auto-Timeout Penalties</span>
-                        </div>
                     </div>
 
                     <!-- Module 3 -->
-                    <div class="glass-card glass-card-hover p-6 rounded-2xl space-y-4">
-                        <div class="w-12 h-12 rounded-xl bg-brand-cyan/10 border border-brand-cyan/20 flex items-center justify-center text-brand-cyan text-xl">
+                    <div class="tech-card p-5 rounded-xl space-y-2.5">
+                        <div class="w-10 h-10 rounded-lg bg-brand-cyan/10 border border-brand-cyan/20 flex items-center justify-center text-brand-cyan text-lg">
                             <i class="fa-solid fa-quote-left"></i>
                         </div>
-                        <h3 class="text-lg font-bold text-white">Cinematic Quote & Welcomer Engine</h3>
-                        <p class="text-gray-300 text-sm leading-relaxed">
-                            Renders clean quote cards from any message or attachment. Includes custom font fallbacks, emoji rendering, rich-text markdown parsing, dynamic background blurring, and custom greeting cards for new members.
+                        <h3 class="text-sm font-bold text-white">Cinematic Quote & Welcomer</h3>
+                        <p class="text-xs text-gray-300 leading-relaxed">
+                            Renders clean image cards from chat messages or creates custom blurred greeting image banners whenever new members join.
                         </p>
-                        <div class="flex flex-wrap gap-2 pt-2">
-                            <span class="text-xs px-2.5 py-1 rounded-lg bg-dark-surface text-gray-300 font-mono">High-Res Rendering</span>
-                            <span class="text-xs px-2.5 py-1 rounded-lg bg-dark-surface text-gray-300 font-mono">Dynamic Welcomers</span>
-                        </div>
                     </div>
 
                     <!-- Module 4 -->
-                    <div class="glass-card glass-card-hover p-6 rounded-2xl space-y-4">
-                        <div class="w-12 h-12 rounded-xl bg-brand-emerald/10 border border-brand-emerald/20 flex items-center justify-center text-brand-emerald text-xl">
-                            <i class="fa-solid fa-mask"></i>
+                    <div class="tech-card p-5 rounded-xl space-y-2.5">
+                        <div class="w-10 h-10 rounded-lg bg-brand-emerald/10 border border-brand-emerald/20 flex items-center justify-center text-brand-emerald text-lg">
+                            <i class="fa-solid fa-masks-theater"></i>
                         </div>
-                        <h3 class="text-lg font-bold text-white">Persona Locks & Chat Transformers</h3>
-                        <p class="text-gray-300 text-sm leading-relaxed">
-                            Applies continuous real-time text transformations using secure webhooks. Allows administrators to force users into styled text modes (e.g., UwU, Pirate, Leet, Cowboy, Tsundere) while retaining user avatars and mentions.
+                        <h3 class="text-sm font-bold text-white">Persona Lock Transformers</h3>
+                        <p class="text-xs text-gray-300 leading-relaxed">
+                            Applies webhook transformations to specific users. Rewrites their chat messages into styled dialects (UwU, Pirate, Leet, Cowboy) while maintaining avatar profiles.
                         </p>
-                        <div class="flex flex-wrap gap-2 pt-2">
-                            <span class="text-xs px-2.5 py-1 rounded-lg bg-dark-surface text-gray-300 font-mono">Webhook Mirroring</span>
-                            <span class="text-xs px-2.5 py-1 rounded-lg bg-dark-surface text-gray-300 font-mono">15 Persona Modes</span>
-                        </div>
                     </div>
                 </div>
             </section>
 
             <!-- Command Manual Section -->
-            <section id="commands" class="space-y-6">
-                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <section id="commands" class="space-y-4">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div>
-                        <h2 class="text-2xl font-bold text-white flex items-center gap-3">
-                            <i class="fa-solid fa-terminal text-brand-cyan"></i> Interactive Command Manual
+                        <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-terminal text-brand-cyan"></i> Command Manual
                         </h2>
-                        <p class="text-gray-400 text-sm">Filter, search, and click any command to copy signature or view permissions.</p>
+                        <p class="text-xs text-gray-400">Filter commands or search by syntax.</p>
                     </div>
 
                     <!-- Search Input -->
-                    <div class="relative w-full md:w-72">
-                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
-                        <input type="text" id="command-search" placeholder="Search commands..." class="w-full bg-dark-surface border border-white/10 rounded-xl pl-10 pr-4 py-2 text-sm text-white placeholder-gray-400 focus:outline-none focus:border-brand-500 transition-colors">
+                    <div class="relative w-full sm:w-64">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-xs"></i>
+                        <input type="text" id="command-search" placeholder="Filter commands..." class="w-full bg-obsidian-800 border border-obsidian-border rounded-lg pl-9 pr-3 py-1.5 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-brand-500 transition-colors font-mono">
                     </div>
                 </div>
 
-                <!-- Category Tabs -->
-                <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none" id="category-tabs">
-                    <button data-category="all" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-brand-600 text-white shadow-lg shadow-brand-500/20 flex items-center gap-2 whitespace-nowrap">
-                        <i class="fa-solid fa-list-check"></i> All Commands
+                <!-- Filter Category Tabs -->
+                <div class="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none" id="category-tabs">
+                    <button data-category="all" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-600 text-white flex items-center gap-1.5 whitespace-nowrap">
+                        <i class="fa-solid fa-list text-[10px]"></i> All
                     </button>
-                    <button data-category="security" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-dark-surface text-gray-300 hover:bg-white/5 transition-colors flex items-center gap-2 whitespace-nowrap">
-                        <i class="fa-solid fa-shield-halved text-brand-400"></i> Security & Protection
+                    <button data-category="security" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-obsidian-800 text-gray-300 hover:bg-obsidian-hover transition-colors flex items-center gap-1.5 whitespace-nowrap">
+                        <i class="fa-solid fa-shield text-brand-500 text-[10px]"></i> Security
                     </button>
-                    <button data-category="moderation" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-dark-surface text-gray-300 hover:bg-white/5 transition-colors flex items-center gap-2 whitespace-nowrap">
-                        <i class="fa-solid fa-gavel text-amber-400"></i> Moderation
+                    <button data-category="moderation" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-obsidian-800 text-gray-300 hover:bg-obsidian-hover transition-colors flex items-center gap-1.5 whitespace-nowrap">
+                        <i class="fa-solid fa-gavel text-amber-400 text-[10px]"></i> Moderation
                     </button>
-                    <button data-category="quote" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-dark-surface text-gray-300 hover:bg-white/5 transition-colors flex items-center gap-2 whitespace-nowrap">
-                        <i class="fa-solid fa-image text-brand-cyan"></i> Welcomer & Quotes
+                    <button data-category="quote" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-obsidian-800 text-gray-300 hover:bg-obsidian-hover transition-colors flex items-center gap-1.5 whitespace-nowrap">
+                        <i class="fa-solid fa-image text-brand-cyan text-[10px]"></i> Welcomer & Quotes
                     </button>
-                    <button data-category="locks" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-dark-surface text-gray-300 hover:bg-white/5 transition-colors flex items-center gap-2 whitespace-nowrap">
-                        <i class="fa-solid fa-mask text-brand-accent"></i> Persona Locks
+                    <button data-category="locks" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-obsidian-800 text-gray-300 hover:bg-obsidian-hover transition-colors flex items-center gap-1.5 whitespace-nowrap">
+                        <i class="fa-solid fa-masks-theater text-brand-accent text-[10px]"></i> Locks
                     </button>
-                    <button data-category="ai" class="tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-dark-surface text-gray-300 hover:bg-white/5 transition-colors flex items-center gap-2 whitespace-nowrap">
-                        <i class="fa-solid fa-brain text-brand-emerald"></i> AI & Utility
+                    <button data-category="ai" class="tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-obsidian-800 text-gray-300 hover:bg-obsidian-hover transition-colors flex items-center gap-1.5 whitespace-nowrap">
+                        <i class="fa-solid fa-brain text-brand-emerald text-[10px]"></i> AI & Utility
                     </button>
                 </div>
 
                 <!-- Command Cards Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="command-grid">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="command-grid">
 
-                    <!-- SECURITY COMMANDS -->
-                    <div class="cmd-card glass-card p-5 rounded-2xl space-y-3" data-category="security" data-keywords="setup verification anti-raid role channel">
+                    <!-- SECURITY -->
+                    <div class="cmd-card tech-card p-4 rounded-xl space-y-2" data-category="security" data-keywords="setup verification anti-raid role channel">
                         <div class="flex items-center justify-between">
-                            <span class="font-mono text-sm font-bold text-brand-400 flex items-center gap-2">
-                                <i class="fa-solid fa-terminal text-xs"></i> /setup
-                            </span>
-                            <span class="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20">Administrator / Owner</span>
+                            <span class="font-mono text-xs font-bold text-brand-400">/setup</span>
+                            <span class="text-[9px] uppercase tracking-wider font-bold px-1.5 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20 font-mono">Admin</span>
                         </div>
-                        <p class="text-xs text-gray-300">Deploys the persistent visual verification challenge and configures server safeguards.</p>
-                        <div class="bg-dark-bg p-2.5 rounded-lg font-mono text-[11px] text-gray-400 overflow-x-auto flex items-center justify-between">
-                            <code>/setup [log_channel] [verified_role] [staff_role] ...</code>
-                            <button onclick="copyCode('/setup')" class="text-gray-400 hover:text-white transition-colors"><i class="fa-regular fa-copy"></i></button>
+                        <p class="text-xs text-gray-300">Deploys persistent visual verification captcha portal in the target channel.</p>
+                        <div class="bg-obsidian-900 p-2 rounded font-mono text-[11px] text-gray-400 flex items-center justify-between">
+                            <code>/setup [log_channel] [verified_role]</code>
+                            <button onclick="copyCode('/setup')" class="hover:text-white"><i class="fa-regular fa-copy"></i></button>
                         </div>
                     </div>
 
-                    <div class="cmd-card glass-card p-5 rounded-2xl space-y-3" data-category="security" data-keywords="trust untrusted trusted whitelist">
+                    <div class="cmd-card tech-card p-4 rounded-xl space-y-2" data-category="security" data-keywords="antiinvite config exempt channel role">
                         <div class="flex items-center justify-between">
-                            <span class="font-mono text-sm font-bold text-brand-400 flex items-center gap-2">
-                                <i class="fa-solid fa-terminal text-xs"></i> /trust & /untrust
-                            </span>
-                            <span class="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20">Owner / Creator</span>
+                            <span class="font-mono text-xs font-bold text-brand-400">/antiinvite config</span>
+                            <span class="text-[9px] uppercase tracking-wider font-bold px-1.5 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20 font-mono">Admin</span>
                         </div>
-                        <p class="text-xs text-gray-300">Adds or removes a user from the anti-raid trusted list, bypassing safeguard limits.</p>
-                        <div class="bg-dark-bg p-2.5 rounded-lg font-mono text-[11px] text-gray-400 overflow-x-auto flex items-center justify-between">
-                            <code>/trust [user]  |  /untrust [user]</code>
-                            <button onclick="copyCode('/trust')" class="text-gray-400 hover:text-white transition-colors"><i class="fa-regular fa-copy"></i></button>
+                        <p class="text-xs text-gray-300">Configures real-time invite scanning and obfuscation filters.</p>
+                        <div class="bg-obsidian-900 p-2 rounded font-mono text-[11px] text-gray-400 flex items-center justify-between">
+                            <code>/antiinvite config [enabled] [timeout]</code>
+                            <button onclick="copyCode('/antiinvite config')" class="hover:text-white"><i class="fa-regular fa-copy"></i></button>
                         </div>
                     </div>
 
-                    <div class="cmd-card glass-card p-5 rounded-2xl space-y-3" data-category="security" data-keywords="antiinvite anti invite config exempt channel role">
+                    <!-- MODERATION -->
+                    <div class="cmd-card tech-card p-4 rounded-xl space-y-2" data-category="moderation" data-keywords="ban kick softban warn timeout">
                         <div class="flex items-center justify-between">
-                            <span class="font-mono text-sm font-bold text-brand-400 flex items-center gap-2">
-                                <i class="fa-solid fa-terminal text-xs"></i> /antiinvite config
-                            </span>
-                            <span class="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20">Administrator</span>
+                            <span class="font-mono text-xs font-bold text-amber-400">/ban | /kick | /timeout</span>
+                            <span class="text-[9px] uppercase tracking-wider font-bold px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 font-mono">Mod</span>
                         </div>
-                        <p class="text-xs text-gray-300">Enables/disables real-time invite link scanning and configures timeout penalties.</p>
-                        <div class="bg-dark-bg p-2.5 rounded-lg font-mono text-[11px] text-gray-400 overflow-x-auto flex items-center justify-between">
-                            <code>/antiinvite config [enabled] [timeout_minutes]</code>
-                            <button onclick="copyCode('/antiinvite config')" class="text-gray-400 hover:text-white transition-colors"><i class="fa-regular fa-copy"></i></button>
-                        </div>
-                    </div>
-
-                    <div class="cmd-card glass-card p-5 rounded-2xl space-y-3" data-category="security" data-keywords="antiinvite exempt_channel exempt_role">
-                        <div class="flex items-center justify-between">
-                            <span class="font-mono text-sm font-bold text-brand-400 flex items-center gap-2">
-                                <i class="fa-solid fa-terminal text-xs"></i> /antiinvite exempt_channel / role
-                            </span>
-                            <span class="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20">Administrator</span>
-                        </div>
-                        <p class="text-xs text-gray-300">Toggles anti-invite exemptions for specific text channels or administrative roles.</p>
-                        <div class="bg-dark-bg p-2.5 rounded-lg font-mono text-[11px] text-gray-400 overflow-x-auto flex items-center justify-between">
-                            <code>/antiinvite exempt_channel [channel]</code>
-                            <button onclick="copyCode('/antiinvite exempt_channel')" class="text-gray-400 hover:text-white transition-colors"><i class="fa-regular fa-copy"></i></button>
-                        </div>
-                    </div>
-
-                    <!-- MODERATION COMMANDS -->
-                    <div class="cmd-card glass-card p-5 rounded-2xl space-y-3" data-category="moderation" data-keywords="kick ban unban softban moderation member">
-                        <div class="flex items-center justify-between">
-                            <span class="font-mono text-sm font-bold text-amber-400 flex items-center gap-2">
-                                <i class="fa-solid fa-terminal text-xs"></i> /kick | /ban | /softban
-                            </span>
-                            <span class="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Administrator</span>
-                        </div>
-                        <p class="text-xs text-gray-300">Enforces hierarchy-aware kicking, permanent banning, softbanning (clears messages), and unbanning.</p>
-                        <div class="bg-dark-bg p-2.5 rounded-lg font-mono text-[11px] text-gray-400 overflow-x-auto flex items-center justify-between">
+                        <p class="text-xs text-gray-300">Executes hierarchy-aware moderation actions with DM notices.</p>
+                        <div class="bg-obsidian-900 p-2 rounded font-mono text-[11px] text-gray-400 flex items-center justify-between">
                             <code>/ban [member] [reason]</code>
-                            <button onclick="copyCode('/ban')" class="text-gray-400 hover:text-white transition-colors"><i class="fa-regular fa-copy"></i></button>
+                            <button onclick="copyCode('/ban')" class="hover:text-white"><i class="fa-regular fa-copy"></i></button>
                         </div>
                     </div>
 
-                    <div class="cmd-card glass-card p-5 rounded-2xl space-y-3" data-category="moderation" data-keywords="timeout untimeout warn mute duration">
+                    <div class="cmd-card tech-card p-4 rounded-xl space-y-2" data-category="moderation" data-keywords="purge lock nuke clear channel">
                         <div class="flex items-center justify-between">
-                            <span class="font-mono text-sm font-bold text-amber-400 flex items-center gap-2">
-                                <i class="fa-solid fa-terminal text-xs"></i> /timeout | /untimeout | /warn
-                            </span>
-                            <span class="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Administrator</span>
+                            <span class="font-mono text-xs font-bold text-amber-400">/purge | /lock | /nuke</span>
+                            <span class="text-[9px] uppercase tracking-wider font-bold px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 font-mono">Admin</span>
                         </div>
-                        <p class="text-xs text-gray-300">Temporarily mutes a user for specified minutes or sends official warning notices via DM.</p>
-                        <div class="bg-dark-bg p-2.5 rounded-lg font-mono text-[11px] text-gray-400 overflow-x-auto flex items-center justify-between">
-                            <code>/timeout [member] [duration_minutes] [reason]</code>
-                            <button onclick="copyCode('/timeout')" class="text-gray-400 hover:text-white transition-colors"><i class="fa-regular fa-copy"></i></button>
+                        <p class="text-xs text-gray-300">Bulk purges channel messages or locks channel write permissions.</p>
+                        <div class="bg-obsidian-900 p-2 rounded font-mono text-[11px] text-gray-400 flex items-center justify-between">
+                            <code>/purge [amount]</code>
+                            <button onclick="copyCode('/purge')" class="hover:text-white"><i class="fa-regular fa-copy"></i></button>
                         </div>
                     </div>
 
-                    <div class="cmd-card glass-card p-5 rounded-2xl space-y-3" data-category="moderation" data-keywords="purge lock unlock slowmode nuke message channel">
+                    <!-- QUOTE & WELCOMER -->
+                    <div class="cmd-card tech-card p-4 rounded-xl space-y-2" data-category="quote" data-keywords="quote quo render text card">
                         <div class="flex items-center justify-between">
-                            <span class="font-mono text-sm font-bold text-amber-400 flex items-center gap-2">
-                                <i class="fa-solid fa-terminal text-xs"></i> /purge | /lock | /nuke
-                            </span>
-                            <span class="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Administrator</span>
+                            <span class="font-mono text-xs font-bold text-brand-cyan">/quote [msg_id]</span>
+                            <span class="text-[9px] uppercase tracking-wider font-bold px-1.5 py-0.5 rounded bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/20 font-mono">Everyone</span>
                         </div>
-                        <p class="text-xs text-gray-300">Bulk clears messages, locks down channel permissions, or clones & resets channel history (nuke).</p>
-                        <div class="bg-dark-bg p-2.5 rounded-lg font-mono text-[11px] text-gray-400 overflow-x-auto flex items-center justify-between">
-                            <code>/purge [amount]  |  /nuke</code>
-                            <button onclick="copyCode('/purge')" class="text-gray-400 hover:text-white transition-colors"><i class="fa-regular fa-copy"></i></button>
-                        </div>
-                    </div>
-
-                    <div class="cmd-card glass-card p-5 rounded-2xl space-y-3" data-category="moderation" data-keywords="autosyncall synccat sync channel permission category">
-                        <div class="flex items-center justify-between">
-                            <span class="font-mono text-sm font-bold text-amber-400 flex items-center gap-2">
-                                <i class="fa-solid fa-terminal text-xs"></i> /autosyncall | /synccat
-                            </span>
-                            <span class="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Administrator</span>
-                        </div>
-                        <p class="text-xs text-gray-300">Bulk syncs channel overrides across all categories or a specific target category.</p>
-                        <div class="bg-dark-bg p-2.5 rounded-lg font-mono text-[11px] text-gray-400 overflow-x-auto flex items-center justify-between">
-                            <code>/autosyncall  |  /synccat [category]</code>
-                            <button onclick="copyCode('/autosyncall')" class="text-gray-400 hover:text-white transition-colors"><i class="fa-regular fa-copy"></i></button>
-                        </div>
-                    </div>
-
-                    <!-- WELCOMER & QUOTE COMMANDS -->
-                    <div class="cmd-card glass-card p-5 rounded-2xl space-y-3" data-category="quote" data-keywords="quote quo card render image text">
-                        <div class="flex items-center justify-between">
-                            <span class="font-mono text-sm font-bold text-brand-cyan flex items-center gap-2">
-                                <i class="fa-solid fa-terminal text-xs"></i> /quote (or /quo)
-                            </span>
-                            <span class="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/20">Everyone</span>
-                        </div>
-                        <p class="text-xs text-gray-300">Generates an aesthetic quote image card from a replied message, message ID, or recent chat.</p>
-                        <div class="bg-dark-bg p-2.5 rounded-lg font-mono text-[11px] text-gray-400 overflow-x-auto flex items-center justify-between">
+                        <p class="text-xs text-gray-300">Renders high-definition image quote card from chat messages.</p>
+                        <div class="bg-obsidian-900 p-2 rounded font-mono text-[11px] text-gray-400 flex items-center justify-between">
                             <code>/quote [message_id_or_url]</code>
-                            <button onclick="copyCode('/quote')" class="text-gray-400 hover:text-white transition-colors"><i class="fa-regular fa-copy"></i></button>
+                            <button onclick="copyCode('/quote')" class="hover:text-white"><i class="fa-regular fa-copy"></i></button>
                         </div>
                     </div>
 
-                    <div class="cmd-card glass-card p-5 rounded-2xl space-y-3" data-category="quote" data-keywords="welcomer welcome toggle channel test status">
+                    <div class="cmd-card tech-card p-4 rounded-xl space-y-2" data-category="quote" data-keywords="welcomer welcome channel test">
                         <div class="flex items-center justify-between">
-                            <span class="font-mono text-sm font-bold text-brand-cyan flex items-center gap-2">
-                                <i class="fa-solid fa-terminal text-xs"></i> /welcomer channel / test
-                            </span>
-                            <span class="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Administrator</span>
+                            <span class="font-mono text-xs font-bold text-brand-cyan">/welcomer channel</span>
+                            <span class="text-[9px] uppercase tracking-wider font-bold px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 font-mono">Admin</span>
                         </div>
-                        <p class="text-xs text-gray-300">Configures automated welcome cards sent when new members join the server.</p>
-                        <div class="bg-dark-bg p-2.5 rounded-lg font-mono text-[11px] text-gray-400 overflow-x-auto flex items-center justify-between">
-                            <code>/welcomer channel [channel]  |  /welcomer test</code>
-                            <button onclick="copyCode('/welcomer test')" class="text-gray-400 hover:text-white transition-colors"><i class="fa-regular fa-copy"></i></button>
+                        <p class="text-xs text-gray-300">Binds dynamic welcome card banners to target arrival channel.</p>
+                        <div class="bg-obsidian-900 p-2 rounded font-mono text-[11px] text-gray-400 flex items-center justify-between">
+                            <code>/welcomer channel [channel]</code>
+                            <button onclick="copyCode('/welcomer channel')" class="hover:text-white"><i class="fa-regular fa-copy"></i></button>
                         </div>
                     </div>
 
                     <!-- PERSONA LOCKS -->
-                    <div class="cmd-card glass-card p-5 rounded-2xl space-y-3" data-category="locks" data-keywords="wlock uwulock nyalock pablolock bwahlock lock mode">
+                    <div class="cmd-card tech-card p-4 rounded-xl space-y-2" data-category="locks" data-keywords="wlock uwulock pablolock mode persona">
                         <div class="flex items-center justify-between">
-                            <span class="font-mono text-sm font-bold text-brand-accent flex items-center gap-2">
-                                <i class="fa-solid fa-terminal text-xs"></i> /wlock & Persona Locks
-                            </span>
-                            <span class="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded bg-brand-accent/10 text-brand-accent border border-brand-accent/20">Manage Messages</span>
+                            <span class="font-mono text-xs font-bold text-brand-accent">/wlock & Modes</span>
+                            <span class="text-[9px] uppercase tracking-wider font-bold px-1.5 py-0.5 rounded bg-brand-accent/10 text-brand-accent border border-brand-accent/20 font-mono">Manage Msgs</span>
                         </div>
-                        <p class="text-xs text-gray-300">Applies real-time continuous persona transformations (UwU, Nya, Pirate, Cowboy, Leet, Goth, etc.) on target users.</p>
-                        <div class="bg-dark-bg p-2.5 rounded-lg font-mono text-[11px] text-gray-400 overflow-x-auto flex items-center justify-between">
-                            <code>/wlock [member] [modes]  |  /uwulock [member]</code>
-                            <button onclick="copyCode('/wlock')" class="text-gray-400 hover:text-white transition-colors"><i class="fa-regular fa-copy"></i></button>
+                        <p class="text-xs text-gray-300">Enforces webhook text transformations on target member chat messages.</p>
+                        <div class="bg-obsidian-900 p-2 rounded font-mono text-[11px] text-gray-400 flex items-center justify-between">
+                            <code>/wlock [member] [mode]</code>
+                            <button onclick="copyCode('/wlock')" class="hover:text-white"><i class="fa-regular fa-copy"></i></button>
                         </div>
                     </div>
 
-                    <div class="cmd-card glass-card p-5 rounded-2xl space-y-3" data-category="locks" data-keywords="removelock removelocks locklist unlock persona">
+                    <!-- AI COMMANDS -->
+                    <div class="cmd-card tech-card p-4 rounded-xl space-y-2" data-category="ai" data-keywords="aichannel aiall ai channel">
                         <div class="flex items-center justify-between">
-                            <span class="font-mono text-sm font-bold text-brand-accent flex items-center gap-2">
-                                <i class="fa-solid fa-terminal text-xs"></i> /removelocks | /locklist
-                            </span>
-                            <span class="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded bg-brand-accent/10 text-brand-accent border border-brand-accent/20">Manage Messages</span>
+                            <span class="font-mono text-xs font-bold text-brand-emerald">#aichannel</span>
+                            <span class="text-[9px] uppercase tracking-wider font-bold px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 font-mono">Admin</span>
                         </div>
-                        <p class="text-xs text-gray-300">Displays active locks or strips all lock transformations from a specific member.</p>
-                        <div class="bg-dark-bg p-2.5 rounded-lg font-mono text-[11px] text-gray-400 overflow-x-auto flex items-center justify-between">
-                            <code>/removelocks [member]  |  /locklist</code>
-                            <button onclick="copyCode('/removelocks')" class="text-gray-400 hover:text-white transition-colors"><i class="fa-regular fa-copy"></i></button>
-                        </div>
-                    </div>
-
-                    <!-- AI & UTILITY -->
-                    <div class="cmd-card glass-card p-5 rounded-2xl space-y-3" data-category="ai" data-keywords="aichannel aiall ai channel restrict">
-                        <div class="flex items-center justify-between">
-                            <span class="font-mono text-sm font-bold text-brand-emerald flex items-center gap-2">
-                                <i class="fa-solid fa-hashtag text-xs"></i> #aichannel | #aiall
-                            </span>
-                            <span class="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Administrator / Owner</span>
-                        </div>
-                        <p class="text-xs text-gray-300">Locks conversational AI features strictly to a single channel or unlocks globally.</p>
-                        <div class="bg-dark-bg p-2.5 rounded-lg font-mono text-[11px] text-gray-400 overflow-x-auto flex items-center justify-between">
-                            <code>#aichannel [#channel]  |  #aiall</code>
-                            <button onclick="copyCode('#aichannel')" class="text-gray-400 hover:text-white transition-colors"><i class="fa-regular fa-copy"></i></button>
-                        </div>
-                    </div>
-
-                    <div class="cmd-card glass-card p-5 rounded-2xl space-y-3" data-category="ai" data-keywords="replacedmsession sessionreset sessioninfo stats help">
-                        <div class="flex items-center justify-between">
-                            <span class="font-mono text-sm font-bold text-brand-emerald flex items-center gap-2">
-                                <i class="fa-solid fa-hashtag text-xs"></i> #replacedmsession | #stats
-                            </span>
-                            <span class="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded bg-brand-emerald/10 text-brand-emerald border border-brand-emerald/20">Everyone</span>
-                        </div>
-                        <p class="text-xs text-gray-300">Syncs server AI discussion to your private DMs, resets session history, or displays bot latency stats.</p>
-                        <div class="bg-dark-bg p-2.5 rounded-lg font-mono text-[11px] text-gray-400 overflow-x-auto flex items-center justify-between">
-                            <code>#replacedmsession  |  #stats</code>
-                            <button onclick="copyCode('#replacedmsession')" class="text-gray-400 hover:text-white transition-colors"><i class="fa-regular fa-copy"></i></button>
+                        <p class="text-xs text-gray-300">Locks conversational AI engine strictly to a specific channel.</p>
+                        <div class="bg-obsidian-900 p-2 rounded font-mono text-[11px] text-gray-400 flex items-center justify-between">
+                            <code>#aichannel [#channel]</code>
+                            <button onclick="copyCode('#aichannel')" class="hover:text-white"><i class="fa-regular fa-copy"></i></button>
                         </div>
                     </div>
 
                 </div>
             </section>
 
-            <!-- INTERACTIVE LOCK PLAYGROUND -->
-            <section id="playground" class="glass-card p-6 sm:p-8 rounded-3xl space-y-6 border border-brand-accent/20 relative overflow-hidden">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <!-- PERSONA LOCK LIVE SIMULATOR -->
+            <section id="playground" class="tech-card p-5 sm:p-6 rounded-2xl border border-brand-accent/30 space-y-4">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div>
-                        <h2 class="text-2xl font-bold text-white flex items-center gap-3">
+                        <h2 class="text-lg font-bold text-white flex items-center gap-2">
                             <i class="fa-solid fa-wand-magic-sparkles text-brand-accent"></i> Persona Lock Playground
                         </h2>
-                        <p class="text-gray-400 text-sm">Test out text lock persona transformers live on this page!</p>
+                        <p class="text-xs text-gray-400">Test real-time persona rewrites in your browser.</p>
                     </div>
 
                     <!-- Mode Select -->
-                    <select id="lock-mode-select" class="bg-dark-surface border border-white/10 text-brand-accent font-semibold text-sm rounded-xl px-4 py-2 focus:outline-none focus:border-brand-accent">
+                    <select id="lock-mode-select" class="bg-obsidian-800 border border-obsidian-border text-brand-accent font-mono text-xs rounded-lg px-3 py-1.5 focus:outline-none focus:border-brand-accent">
                         <option value="uwu">UwU Mode</option>
                         <option value="nya">Nya Mode</option>
                         <option value="pirate">Pirate Mode</option>
@@ -573,67 +512,55 @@
                         <option value="angry">Angry Mode</option>
                         <option value="goth">Goth Mode</option>
                         <option value="tsundere">Tsundere Mode</option>
-                        <option value="maid">Maid Mode</option>
                     </select>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <!-- Input -->
-                    <div class="space-y-2">
-                        <label class="text-xs font-bold text-gray-400 uppercase tracking-wider">Original Input Message</label>
-                        <textarea id="playground-input" rows="4" class="w-full bg-dark-bg border border-white/10 rounded-2xl p-4 text-sm text-gray-200 focus:outline-none focus:border-brand-accent transition-colors" placeholder="Type a message here to transform... (e.g. Hello friend, you are cute!)">Hello friend, you are cute!</textarea>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div class="space-y-1">
+                        <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider font-mono">Original Message</label>
+                        <textarea id="playground-input" rows="3" class="w-full bg-obsidian-900 border border-obsidian-border rounded-xl p-3 text-xs text-gray-200 focus:outline-none focus:border-brand-accent transition-colors resize-none" placeholder="Type text here...">Hello friend, you are looking nice today!</textarea>
                     </div>
 
-                    <!-- Output -->
-                    <div class="space-y-2">
-                        <label class="text-xs font-bold text-gray-400 uppercase tracking-wider">Transformed Persona Output</label>
-                        <div id="playground-output" class="w-full h-[120px] bg-dark-bg border border-brand-accent/30 rounded-2xl p-4 text-sm font-mono text-brand-accent overflow-y-auto flex items-center">
-                            Hevvo mawtie, you awe kwiute! uwu
+                    <div class="space-y-1">
+                        <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider font-mono">Transformed Output</label>
+                        <div id="playground-output" class="w-full h-[74px] bg-obsidian-900 border border-brand-accent/30 rounded-xl p-3 text-xs font-mono text-brand-accent overflow-y-auto">
+                            Hevvo mawtie, you awe wooking nice today! uwu
                         </div>
                     </div>
                 </div>
             </section>
 
             <!-- ADMINISTRATIVE SETUP GUIDE -->
-            <section id="setup" class="space-y-6">
+            <section id="setup" class="space-y-4">
                 <div>
-                    <h2 class="text-2xl font-bold text-white flex items-center gap-3">
-                        <i class="fa-solid fa-sliders text-brand-emerald"></i> Administrative Setup Guide
+                    <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-sliders text-brand-emerald"></i> Admin Setup Guide
                     </h2>
-                    <p class="text-gray-400 text-sm">Follow these 3 simple steps to configure your server's security grid.</p>
+                    <p class="text-xs text-gray-400">Step-by-step guild setup procedure.</p>
                 </div>
 
-                <div class="space-y-4">
-                    <!-- Step 1 -->
-                    <div class="glass-card p-6 rounded-2xl flex items-start gap-4">
-                        <div class="w-8 h-8 rounded-full bg-brand-emerald/10 border border-brand-emerald/30 text-brand-emerald flex items-center justify-center font-bold font-mono text-sm flex-shrink-0">1</div>
-                        <div class="space-y-2">
-                            <h3 class="text-base font-bold text-white">Deploy Verification Gateway</h3>
-                            <p class="text-xs text-gray-300 leading-relaxed">
-                                Execute <code class="text-brand-emerald bg-dark-bg px-2 py-0.5 rounded font-mono">/setup</code> in your dedicated verification channel. Select your staff, verified role, log channel, and account age limit. The bot will automatically restrict channel visibility for unverified users and send the interactive captcha portal.
-                            </p>
+                <div class="space-y-3">
+                    <div class="tech-card p-4 rounded-xl flex items-start gap-3">
+                        <div class="w-6 h-6 rounded bg-brand-emerald/10 border border-brand-emerald/30 text-brand-emerald font-mono font-bold text-xs flex items-center justify-center flex-shrink-0">1</div>
+                        <div class="space-y-1">
+                            <h3 class="text-xs font-bold text-white">Deploy Captcha Channel</h3>
+                            <p class="text-xs text-gray-300">Run <code class="text-brand-emerald font-mono bg-obsidian-900 px-1.5 py-0.5 rounded">/setup</code> in an empty channel. The bot configures role overrides automatically.</p>
                         </div>
                     </div>
 
-                    <!-- Step 2 -->
-                    <div class="glass-card p-6 rounded-2xl flex items-start gap-4">
-                        <div class="w-8 h-8 rounded-full bg-brand-emerald/10 border border-brand-emerald/30 text-brand-emerald flex items-center justify-center font-bold font-mono text-sm flex-shrink-0">2</div>
-                        <div class="space-y-2">
-                            <h3 class="text-base font-bold text-white">Configure Anti-Invite Safeguards</h3>
-                            <p class="text-xs text-gray-300 leading-relaxed">
-                                Run <code class="text-brand-emerald bg-dark-bg px-2 py-0.5 rounded font-mono">/antiinvite config enabled:True</code> to protect chat against unauthorized self-promotions. Exclude media or partner channels using <code class="text-brand-emerald bg-dark-bg px-2 py-0.5 rounded font-mono">/antiinvite exempt_channel</code>.
-                            </p>
+                    <div class="tech-card p-4 rounded-xl flex items-start gap-3">
+                        <div class="w-6 h-6 rounded bg-brand-emerald/10 border border-brand-emerald/30 text-brand-emerald font-mono font-bold text-xs flex items-center justify-center flex-shrink-0">2</div>
+                        <div class="space-y-1">
+                            <h3 class="text-xs font-bold text-white">Enable Obfuscation Invite Filter</h3>
+                            <p class="text-xs text-gray-300">Execute <code class="text-brand-emerald font-mono bg-obsidian-900 px-1.5 py-0.5 rounded">/antiinvite config enabled:True</code> to protect public text channels.</p>
                         </div>
                     </div>
 
-                    <!-- Step 3 -->
-                    <div class="glass-card p-6 rounded-2xl flex items-start gap-4">
-                        <div class="w-8 h-8 rounded-full bg-brand-emerald/10 border border-brand-emerald/30 text-brand-emerald flex items-center justify-center font-bold font-mono text-sm flex-shrink-0">3</div>
-                        <div class="space-y-2">
-                            <h3 class="text-base font-bold text-white">Lock Conversational AI Channel</h3>
-                            <p class="text-xs text-gray-300 leading-relaxed">
-                                Bind AI chat responses to a designated channel by typing <code class="text-brand-emerald bg-dark-bg px-2 py-0.5 rounded font-mono">#aichannel #ai-chat</code>. This ensures general conversation channels remain clean and unspammed.
-                            </p>
+                    <div class="tech-card p-4 rounded-xl flex items-start gap-3">
+                        <div class="w-6 h-6 rounded bg-brand-emerald/10 border border-brand-emerald/30 text-brand-emerald font-mono font-bold text-xs flex items-center justify-center flex-shrink-0">3</div>
+                        <div class="space-y-1">
+                            <h3 class="text-xs font-bold text-white">Bind AI Channel</h3>
+                            <p class="text-xs text-gray-300">Isolate conversational AI to designated chat areas via <code class="text-brand-emerald font-mono bg-obsidian-900 px-1.5 py-0.5 rounded">#aichannel #ai-chat</code>.</p>
                         </div>
                     </div>
                 </div>
@@ -643,16 +570,13 @@
     </div>
 
     <!-- Footer -->
-    <footer class="glass-card border-t border-white/5 py-8 mt-16 text-center text-xs text-gray-400">
-        <div class="max-w-7xl mx-auto px-4 space-y-2">
-            <p>© 2026 Zebeez AI & Sentinel Systems. All rights reserved.</p>
-            <p class="text-gray-500">Built with High-Performance Python • Visual Engine • Security Core</p>
-        </div>
+    <footer class="border-t border-obsidian-border py-6 text-center text-xs text-gray-500 font-mono">
+        <p>© 2026 Zebeez Sentinel Engine • Built for High Performance</p>
     </footer>
 
     <!-- JavaScript Engine -->
     <script>
-        // Copy Code Functionality
+        // Toast Clipboard Copy
         function copyCode(text) {
             navigator.clipboard.writeText(text);
             const toast = document.getElementById('toast');
@@ -660,14 +584,14 @@
             toast.classList.remove('translate-y-20', 'opacity-0');
             setTimeout(() => {
                 toast.classList.add('translate-y-20', 'opacity-0');
-            }, 2500);
+            }, 2200);
         }
 
-        // Command Category Filtering & Search
+        // Command Filter & Search Logic
         const searchInput = document.getElementById('command-search');
         const tabBtns = document.querySelectorAll('.tab-btn');
         const cmdCards = document.querySelectorAll('.cmd-card');
-        let currentCategory = 'all';
+        let activeCategory = 'all';
 
         function filterCommands() {
             const query = searchInput.value.toLowerCase().trim();
@@ -677,10 +601,10 @@
                 const keywords = card.getAttribute('data-keywords').toLowerCase();
                 const textContent = card.textContent.toLowerCase();
 
-                const matchesCategory = (currentCategory === 'all' || category === currentCategory);
-                const matchesSearch = !query || keywords.includes(query) || textContent.includes(query);
+                const matchesCat = (activeCategory === 'all' || category === activeCategory);
+                const matchesQuery = !query || keywords.includes(query) || textContent.includes(query);
 
-                if (matchesCategory && matchesSearch) {
+                if (matchesCat && matchesQuery) {
                     card.classList.remove('hidden');
                 } else {
                     card.classList.add('hidden');
@@ -691,58 +615,56 @@
         tabBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 tabBtns.forEach(b => {
-                    b.classList.remove('bg-brand-600', 'text-white', 'shadow-lg');
-                    b.classList.add('bg-dark-surface', 'text-gray-300');
+                    b.classList.remove('bg-brand-600', 'text-white');
+                    b.classList.add('bg-obsidian-800', 'text-gray-300');
                 });
 
-                btn.classList.remove('bg-dark-surface', 'text-gray-300');
-                btn.classList.add('bg-brand-600', 'text-white', 'shadow-lg');
+                btn.classList.remove('bg-obsidian-800', 'text-gray-300');
+                btn.classList.add('bg-brand-600', 'text-white');
 
-                currentCategory = btn.getAttribute('data-category');
+                activeCategory = btn.getAttribute('data-category');
                 filterCommands();
             });
         });
 
         searchInput.addEventListener('input', filterCommands);
 
-        // Persona Lock Live Simulator
+        // Persona Transformer Simulator Logic
         const playgroundInput = document.getElementById('playground-input');
         const playgroundOutput = document.getElementById('playground-output');
         const modeSelect = document.getElementById('lock-mode-select');
 
         function transformText(text, mode) {
-            if (!text) return '...';
+            if (!text.trim()) return '...';
 
-            if (mode === 'uwu') {
-                return text.replace(/r/g, 'w').replace(/l/g, 'w').replace(/R/g, 'W').replace(/L/g, 'W') + ' uwu';
-            } else if (mode === 'nya') {
-                return text.replace(/na/g, 'nya').replace(/hello/gi, 'nyahallo') + ' nya~ :3';
-            } else if (mode === 'pirate') {
-                return text.replace(/hello/gi, 'ahoy').replace(/friend/gi, 'matey').replace(/you/gi, 'ye') + ' yarrr!';
-            } else if (mode === 'cowboy') {
-                return text.replace(/hello/gi, 'howdy').replace(/friend/gi, 'partner').replace(/you/gi, 'ya') + ' yeehaw!';
-            } else if (mode === 'leet') {
-                return text.replace(/e/gi, '3').replace(/a/gi, '4').replace(/t/gi, '7').replace(/o/gi, '0') + ' 1337';
-            } else if (mode === 'angry') {
-                return text.toUpperCase() + ' GRRRR! 🤬';
-            } else if (mode === 'goth') {
-                return text.toLowerCase().replace(/happy/gi, 'miserable') + ' ... 🖤';
-            } else if (mode === 'tsundere') {
-                return text.replace(/you/gi, 'b-baka').replace(/hello/gi, 'h-mph') + ' ... b-baka!';
-            } else if (mode === 'maid') {
-                return text.replace(/you/gi, 'master').replace(/hello/gi, 'welcome home, master') + ' (curtsies) <3';
+            switch (mode) {
+                case 'uwu':
+                    return text.replace(/r/gi, 'w').replace(/l/gi, 'w') + ' uwu';
+                case 'nya':
+                    return text.replace(/na/gi, 'nya').replace(/hello/gi, 'nyahallo') + ' nya~ :3';
+                case 'pirate':
+                    return text.replace(/hello/gi, 'ahoy').replace(/friend/gi, 'matey').replace(/you/gi, 'ye') + ' yarrr!';
+                case 'cowboy':
+                    return text.replace(/hello/gi, 'howdy').replace(/friend/gi, 'partner') + ' yeehaw!';
+                case 'leet':
+                    return text.replace(/e/gi, '3').replace(/a/gi, '4').replace(/t/gi, '7').replace(/o/gi, '0');
+                case 'angry':
+                    return text.toUpperCase() + ' GRRRR! 🤬';
+                case 'goth':
+                    return text.toLowerCase().replace(/happy/gi, 'miserable') + ' ... 🖤';
+                case 'tsundere':
+                    return text.replace(/you/gi, 'b-baka').replace(/hello/gi, 'h-mph') + ' ... b-baka!';
+                default:
+                    return text;
             }
-            return text;
         }
 
-        function updatePlayground() {
-            const input = playgroundInput.value;
-            const mode = modeSelect.value;
-            playgroundOutput.textContent = transformText(input, mode);
+        function updateSimulator() {
+            playgroundOutput.textContent = transformText(playgroundInput.value, modeSelect.value);
         }
 
-        playgroundInput.addEventListener('input', updatePlayground);
-        modeSelect.addEventListener('change', updatePlayground);
+        playgroundInput.addEventListener('input', updateSimulator);
+        modeSelect.addEventListener('change', updateSimulator);
     </script>
 </body>
 </html>
